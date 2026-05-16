@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -163,6 +162,29 @@
             } : null;
         }
 
+        // Save current slider states into local storage browser cache
+        function saveConfigToStorage() {
+            const currentSettings = {
+                blur: blurInput.value,
+                opacity: opacityInput.value,
+                color: colorInput.value,
+                radius: radiusInput.value
+            };
+            localStorage.setItem('devHub_glassConfig', JSON.stringify(currentSettings));
+        }
+
+        // Fetch configurations from browser memory if available
+        function loadConfigFromStorage() {
+            const savedSettings = localStorage.getItem('devHub_glassConfig');
+            if (savedSettings) {
+                const config = JSON.parse(savedSettings);
+                blurInput.value = config.blur;
+                opacityInput.value = config.opacity;
+                colorInput.value = config.color;
+                radiusInput.value = config.radius;
+            }
+        }
+
         // Live visual style calculation function
         function updateStyles() {
             const blur = blurInput.value;
@@ -187,6 +209,9 @@
 
             const generatedCss = `background: ${bgString};\nbackdrop-filter: ${blurString};\n-webkit-backdrop-filter: ${blurString};\nborder-radius: ${radius}px;\nborder: ${borderString};`;
             cssOutput.innerText = generatedCss;
+
+            // Save settings whenever a user tweaks a configuration setting
+            saveConfigToStorage();
         }
 
         // Setup input watch triggers
@@ -205,7 +230,8 @@
             }, 2000);
         });
 
-        // Initialize execution metrics on screen setup
+        // Load cached configurations before launching initial drawing operations
+        loadConfigFromStorage();
         updateStyles();
     </script>
 </body>
