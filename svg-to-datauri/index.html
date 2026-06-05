@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L5X6RBP5RK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L5X6RBP5RK');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free SVG to DataURI Encoder Online | DevUtilityHub</title>
@@ -58,8 +67,8 @@
         }
         
         .preview-target {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             background-position: center;
             background-repeat: no-repeat;
             background-size: contain;
@@ -147,15 +156,13 @@
     </footer>
 
     <script>
-        // DOM Form Interconnections
         const svgInput = document.getElementById('svgInput');
         const previewTarget = document.getElementById('previewTarget');
         const uriOutput = document.getElementById('uriOutput');
         const copyBtn = document.getElementById('copyBtn');
 
-        // Main XML encoding engine routine
         function encodeSvgToUri() {
-            const rawSvg = svgInput.value.trim();
+            let rawSvg = svgInput.value.trim();
             
             if (!rawSvg) {
                 previewTarget.style.backgroundImage = 'none';
@@ -163,22 +170,27 @@
                 return;
             }
 
+            // Ensure the SVG has the namespace attribute so the browser can render it as a background image
+            if (!rawSvg.includes('xmlns=')) {
+                rawSvg = rawSvg.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+            }
+
             try {
-                // Formatting cleanups to strip code structural clutter
+                // Better encoding scheme matching modern mini-svg-data-uri standards
                 let optimized = rawSvg
-                    .replace(/"/g, "'") // Replace double quotes with single quotes
+                    .replace(/"/g, "'")
                     .replace(/%/g, '%25')
                     .replace(/#/g, '%23')
                     .replace(/{/g, '%7B')
                     .replace(/}/g, '%7D')
                     .replace(/</g, '%3C')
                     .replace(/>/g, '%3E')
-                    .replace(/\s+/g, ' '); // Collapse structural spacing layouts
+                    .replace(/\s+/g, ' ');
 
                 const cleanUri = `data:image/svg+xml,${optimized}`;
                 const fullCssRule = `background-image: url("${cleanUri}");`;
 
-                // Update visual component panels
+                // Render visual changes instantly
                 previewTarget.style.backgroundImage = `url("${cleanUri}")`;
                 uriOutput.innerText = fullCssRule;
             } catch (error) {
@@ -186,12 +198,10 @@
             }
         }
 
-        // Setup realtime watcher listener loop
         svgInput.addEventListener('input', encodeSvgToUri);
 
-        // Instant clipboard copy operations execution logic
         copyBtn.addEventListener('click', () => {
-            if (svgInput.value.trim()) {
+            if (svgInput.value.trim() && !uriOutput.innerText.startsWith('Paste an SVG')) {
                 navigator.clipboard.writeText(uriOutput.innerText);
                 copyBtn.innerText = "CSS Code Copied! ✓";
                 copyBtn.style.background = "#10b981";
@@ -204,4 +214,3 @@
     </script>
 </body>
 </html>
-
