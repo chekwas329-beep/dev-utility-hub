@@ -7,7 +7,6 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-L5X6RBP5RK');
     </script>
 
@@ -21,6 +20,7 @@
             --accent-color: #38bdf8;
             --text-color: #f8fafc;
             --label-color: #94a3b8;
+            --border-color: #334155;
         }
 
         body {
@@ -36,10 +36,7 @@
             box-sizing: border-box;
         }
 
-        header {
-            margin: 1.5rem 0;
-            text-align: center;
-        }
+        header { margin: 1.5rem 0; text-align: center; }
 
         header h1 {
             margin: 0 0 0.5rem 0;
@@ -49,11 +46,7 @@
             -webkit-text-fill-color: transparent;
         }
 
-        header p {
-            margin: 0;
-            font-size: 0.9rem;
-            color: var(--label-color);
-        }
+        header p { margin: 0; font-size: 0.9rem; color: var(--label-color); }
 
         .tabs {
             display: flex;
@@ -63,10 +56,12 @@
             padding: 0.35rem;
             border-radius: 12px;
             width: 100%;
-            max-width: 400px;
+            max-width: 520px;
             box-sizing: border-box;
+            flex-wrap: wrap;
         }
 
+        /* Local tab button */
         .tab-btn {
             background: transparent;
             color: var(--label-color);
@@ -75,17 +70,49 @@
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             flex: 1;
             text-align: center;
             white-space: nowrap;
             transition: all 0.2s ease;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
 
         .tab-btn.active {
             background: var(--panel-color);
             color: var(--accent-color);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* External link tabs */
+        .tab-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            background: transparent;
+            color: var(--label-color);
+            border: none;
+            padding: 0.6rem 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.78rem;
+            flex: 1;
+            text-align: center;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .tab-link:hover {
+            background: rgba(56,189,248,0.08);
+            color: var(--accent-color);
+        }
+
+        .tab-link .ext-icon {
+            font-size: 0.65rem;
+            opacity: 0.6;
         }
 
         .workspace {
@@ -110,17 +137,9 @@
             }
         }
 
-        .controls {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-        }
+        .controls { display: flex; flex-direction: column; gap: 1.25rem; }
 
-        .control-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
+        .control-group { display: flex; flex-direction: column; gap: 0.5rem; }
 
         .control-group label {
             color: var(--label-color);
@@ -129,10 +148,7 @@
             justify-content: space-between;
         }
 
-        .control-group label span {
-            color: var(--accent-color);
-            font-family: monospace;
-        }
+        .control-group label span { color: var(--accent-color); font-family: monospace; }
 
         input[type="range"] {
             -webkit-appearance: none;
@@ -145,32 +161,13 @@
 
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 18px;
-            height: 18px;
+            width: 18px; height: 18px;
             border-radius: 50%;
             background: var(--accent-color);
             cursor: pointer;
         }
 
-        .checkbox-group {
-            flex-direction: row;
-            align-items: center;
-            gap: 0.75rem;
-            cursor: pointer;
-            margin-top: 0.5rem;
-        }
-
-        .checkbox-group input {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--accent-color);
-        }
-
-        .preview-panel {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-        }
+        .preview-panel { display: flex; flex-direction: column; gap: 1.25rem; }
 
         .preview-box-wrapper {
             background: #111827;
@@ -184,30 +181,12 @@
             overflow: hidden;
         }
 
-        .preview-bg-shapes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            display: none;
-            pointer-events: none;
-        }
-
-        .preview-bg-shapes div {
-            position: absolute;
-            border-radius: 50%;
-        }
-
-        .shape-1 { width: 120px; height: 120px; background: #ec4899; top: 20%; left: 15%; }
-        .shape-2 { width: 100px; height: 100px; background: #eab308; bottom: 15%; right: 20%; }
-
         #target-element {
-            width: 130px;
-            height: 130px;
+            width: 140px; height: 140px;
             background: var(--accent-color);
             box-sizing: border-box;
-            transition: border-radius 0.1s ease, box-shadow 0.1s ease;
+            transition: border-radius 0.1s ease-out;
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);
         }
 
         .code-box {
@@ -218,66 +197,41 @@
             border: 1px solid #1e293b;
         }
 
-        .code-box pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-break: break-all;
-        }
+        .code-box pre { margin: 0; white-space: pre-wrap; word-break: break-all; }
 
-        code {
-            font-family: monospace;
-            font-size: 0.85rem;
-            color: #38bdf8;
-        }
+        code { font-family: monospace; font-size: 0.85rem; color: #34d399; }
 
         .copy-btn {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            background: #334155;
-            border: none;
-            padding: 0.3rem 0.6rem;
-            border-radius: 4px;
-            cursor: pointer;
-            color: var(--text-color);
-            font-size: 0.75rem;
-            font-weight: 600;
+            position: absolute; top: 0.5rem; right: 0.5rem;
+            background: #334155; border: none;
+            padding: 0.3rem 0.6rem; border-radius: 4px;
+            cursor: pointer; color: var(--text-color);
+            font-size: 0.75rem; font-weight: 600;
+            transition: all 0.2s;
         }
 
         .ad-placeholder {
-            width: 100%;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.02);
+            width: 100%; height: 60px;
+            background: rgba(255,255,255,0.02);
             border: 1px dashed #334155;
             border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: flex; justify-content: center; align-items: center;
         }
 
         .ad-placeholder span {
-            font-size: 0.65rem;
-            color: var(--label-color);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            text-align: center;
-            padding: 0 0.5rem;
+            font-size: 0.65rem; color: var(--label-color);
+            letter-spacing: 0.5px; text-transform: uppercase;
+            text-align: center; padding: 0 0.5rem;
         }
 
         footer {
             padding: 2rem 0;
-            font-size: 0.8rem;
-            color: var(--label-color);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            text-align: center;
-            width: 100%;
+            font-size: 0.8rem; color: var(--label-color);
+            letter-spacing: 1px; text-transform: uppercase;
+            text-align: center; width: 100%;
         }
 
-        .brand-name {
-            color: var(--accent-color);
-            font-weight: 600;
-        }
+        .brand-name { color: var(--accent-color); font-weight: 600; }
     </style>
 </head>
 <body>
@@ -289,26 +243,29 @@
 
     <div class="tabs">
         <button class="tab-btn active" id="btn-blob" onclick="switchTool('blob')">Blob Generator</button>
-        <button class="tab-btn" id="btn-shadow" onclick="switchTool('shadow')">Box Shadow</button>
-        <button class="tab-btn" id="btn-glass" onclick="switchTool('glass')">Glassmorphism</button>
+
+        <a class="tab-link" href="https://devutilityhub.online/css-box-shadow/" target="_blank" rel="noopener">
+            Box Shadow <span class="ext-icon">↗</span>
+        </a>
+        <a class="tab-link" href="https://devutilityhub.online/glassmorphism-generator/" target="_blank" rel="noopener">
+            Glassmorphism <span class="ext-icon">↗</span>
+        </a>
+        <a class="tab-link" href="https://devutilityhub.online/svg-to-datauri/" target="_blank" rel="noopener">
+            SVG → DataURI <span class="ext-icon">↗</span>
+        </a>
     </div>
 
     <div class="workspace">
-        <div class="controls" id="controls-container">
-            </div>
+        <div class="controls" id="controls-container"></div>
 
         <div class="preview-panel">
             <div class="preview-box-wrapper" id="preview-wrapper">
-                <div class="preview-bg-shapes" id="bg-shapes">
-                    <div class="shape-1"></div>
-                    <div class="shape-2"></div>
-                </div>
                 <div id="target-element"></div>
             </div>
-            
+
             <div class="code-box">
                 <button class="copy-btn" onclick="copyCode()">Copy</button>
-                <pre><code id="code-output">/* CSS Rules */</code></pre>
+                <pre><code id="code-output">border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;</code></pre>
             </div>
 
             <div class="ad-placeholder">
@@ -325,34 +282,18 @@
         let currentTool = 'blob';
 
         const state = {
-            blob: { topL: 50, topR: 50, botR: 50, botL: 50 },
-            shadow: { hOffset: 10, vOffset: 10, blur: 20, spread: 0, opacity: 40, inset: false },
-            glass: { opacity: 20, blur: 10, border: 10 }
+            blob: { topL: 50, topR: 50, botR: 50, botL: 50 }
         };
 
-        function init() {
-            switchTool('blob');
+        function init() { 
+            switchTool('blob'); 
         }
 
         function switchTool(tool) {
             currentTool = tool;
-            
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`btn-${tool}`).classList.add('active');
-
-            const bgShapes = document.getElementById('bg-shapes');
-            const target = document.getElementById('target-element');
-
-            if (tool === 'glass') {
-                bgShapes.style.display = 'block';
-                target.style.background = 'transparent';
-            } else {
-                bgShapes.style.display = 'none';
-                target.style.background = 'var(--accent-color)';
-                target.style.backdropFilter = 'none';
-                target.style.webkitBackdropFilter = 'none';
-                target.style.border = 'none';
-            }
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            const btn = document.getElementById(`btn-${tool}`);
+            if (btn) btn.classList.add('active');
 
             renderControls();
             updatePreview();
@@ -360,136 +301,64 @@
 
         function renderControls() {
             const container = document.getElementById('controls-container');
-            let html = '';
-
-            if (currentTool === 'blob') {
-                html = `
-                    <div class="control-group">
-                        <label>Top Left Radius <span>${state.blob.topL}%</span></label>
-                        <input type="range" min="0" max="100" value="${state.blob.topL}" oninput="updateState('topL', this.value)">
-                    </div>
-                    <div class="control-group">
-                        <label>Top Right Radius <span>${state.blob.topR}%</span></label>
-                        <input type="range" min="0" max="100" value="${state.blob.topR}" oninput="updateState('topR', this.value)">
-                    </div>
-                    <div class="control-group">
-                        <label>Bottom Right Radius <span>${state.blob.botR}%</span></label>
-                        <input type="range" min="0" max="100" value="${state.blob.botR}" oninput="updateState('botR', this.value)">
-                    </div>
-                    <div class="control-group">
-                        <label>Bottom Left Radius <span>${state.blob.botL}%</span></label>
-                        <input type="range" min="0" max="100" value="${state.blob.botL}" oninput="updateState('botL', this.value)">
-                    </div>
-                `;
-            } else if (currentTool === 'shadow') {
-                html = `
-                    <div class="control-group">
-                        <label>Horizontal Offset <span>${state.shadow.hOffset}px</span></label>
-                        <input type="range" min="-50" max="50" value="${state.shadow.hOffset}" oninput="updateState('hOffset', this.value)">
-                    </div>
-                    <div class="control-group">
-                        <label>Vertical Offset <span>${state.shadow.vOffset}px</span></label>
-                        <input type="range" min="-50" max="50" value="${state.shadow.vOffset}" oninput="updateState('vOffset', this.value)">
-                    </div>
-                    <div class="control-group">
-                        <label>Blur Radius <span>${state.shadow.blur}px</span></label>
-                        <input type="range" min="0" max="100" value="${state.shadow.blur}" oninput="updateState('blur', this.value)">
-                    </div>
-                    <div class="control-group">
-                        <label>Spread Radius <span>${state.shadow.spread}px</span></label>
-                        <input type="range" min="-30" max="50" value="${state.shadow.spread}" oninput="updateState('spread', this.value)">
-                    </div>
-                    <div class="control-group">
-                        <label>Shadow Opacity <span>${state.shadow.opacity}%</span></label>
-                        <input type="range" min="0" max="100" value="${state.shadow.opacity}" oninput="updateState('opacity', this.value)">
-                    </div>
-                    <div class="control-group checkbox-group">
-                        <input type="checkbox" id="inset-check" ${state.shadow.inset ? 'checked' : ''} onchange="updateState('inset', this.checked)">
-                        <label for="inset-check" style="color: var(--text-color); cursor:pointer;">Inset Shadow</label>
-                    </div>
-                `;
-            } else if (currentTool === 'glass') {
-                html = `
-                    <div class="control-group">
-                        <label>Background Opacity <span>${state.glass.opacity}%</span></label>
-                        <input type="range" min="0" max="100" value="${state.glass.opacity}" oninput="updateState('opacity', this.value)">
-                    </div>
-                    <div class="control-group">
-                        <label>Backdrop Blur <span>${state.glass.blur}px</span></label>
-                        <input type="range" min="0" max="25" value="${state.glass.blur}" oninput="updateState('blur', this.value)">
-                    </div>
-                    <div class="control-group">
-                        <label>Border Opacity <span>${state.glass.border}%</span></label>
-                        <input type="range" min="0" max="100" value="${state.glass.border}" oninput="updateState('border', this.value)">
-                    </div>
-                `;
-            }
-
-            container.innerHTML = html;
+            const b = state.blob;
+            container.innerHTML = `
+                <div class="control-group">
+                    <label>Top Left Radius <span id="lbl-topL">${b.topL}%</span></label>
+                    <input type="range" min="0" max="100" value="${b.topL}" oninput="updateState('topL', this.value)">
+                </div>
+                <div class="control-group">
+                    <label>Top Right Radius <span id="lbl-topR">${b.topR}%</span></label>
+                    <input type="range" min="0" max="100" value="${b.topR}" oninput="updateState('topR', this.value)">
+                </div>
+                <div class="control-group">
+                    <label>Bottom Right Radius <span id="lbl-botR">${b.botR}%</span></label>
+                    <input type="range" min="0" max="100" value="${b.botR}" oninput="updateState('botR', this.value)">
+                </div>
+                <div class="control-group">
+                    <label>Bottom Left Radius <span id="lbl-botL">${b.botL}%</span></label>
+                    <input type="range" min="0" max="100" value="${b.botL}" oninput="updateState('botL', this.value)">
+                </div>
+            `;
         }
 
         function updateState(key, value) {
-            if (key !== 'inset') {
-                value = parseInt(value);
-            }
-            state[currentTool][key] = value;
-            renderControls();
+            state.blob[key] = parseInt(value);
+            // Update individual inline badge values directly to maintain fluid slider response dragging
+            document.getElementById(`lbl-${key}`).innerText = `${value}%`;
             updatePreview();
         }
 
         function updatePreview() {
             const target = document.getElementById('target-element');
             const codeOutput = document.getElementById('code-output');
+            const b = state.blob;
+            
+            // Mathematical computation for perfect organic responsive liquid blob formulas
+            const tlOpp = 100 - b.topL;
+            const trOpp = 100 - b.topR;
+            const brOpp = 100 - b.botR;
+            const blOpp = 100 - b.botL;
 
-            if (currentTool === 'blob') {
-                const b = state.blob;
-                const borderRadius = `${b.topL}% ${100 - b.topL}% ${100 - b.botR}% ${b.botR}% / ${b.botL}% ${b.topR}% ${100 - b.topR}% ${100 - b.botL}%`;
-                
-                target.style.borderRadius = borderRadius;
-                target.style.boxShadow = 'none';
-                
-                codeOutput.innerText = `border-radius: ${borderRadius};`;
-            } 
-            else if (currentTool === 'shadow') {
-                const s = state.shadow;
-                const alpha = s.opacity / 100;
-                const shadowStr = `${s.inset ? 'inset ' : ''}${s.hOffset}px ${s.vOffset}px ${s.blur}px ${s.spread}px rgba(0, 0, 0, ${alpha})`;
-                
-                target.style.borderRadius = '8px';
-                target.style.boxShadow = shadowStr;
-                
-                codeOutput.innerText = `border-radius: 8px;\nbox-shadow: ${shadowStr};`;
-            } 
-            else if (currentTool === 'glass') {
-                const g = state.glass;
-                const bgAlpha = g.opacity / 100;
-                const borderAlpha = g.border / 100;
-
-                const backgroundStyle = `rgba(255, 255, 255, ${bgAlpha})`;
-                const backdropFilterStyle = `blur(${g.blur}px)`;
-                const borderStyle = `1px solid rgba(255, 255, 255, ${borderAlpha})`;
-
-                target.style.borderRadius = '16px';
-                target.style.background = backgroundStyle;
-                target.style.backdropFilter = backdropFilterStyle;
-                target.style.webkitBackdropFilter = backdropFilterStyle;
-                target.style.border = borderStyle;
-                target.style.boxShadow = '0 8px 32px 0 rgba(0, 0, 0, 0.2)';
-
-                codeOutput.innerText = `background: ${backgroundStyle};\nbackdrop-filter: ${backdropFilterStyle};\n-webkit-backdrop-filter: ${backdropFilterStyle};\nborder: ${borderStyle};\nborder-radius: 16px;\nbox-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);`;
-            }
+            const borderRadius = `${b.topL}% ${b.topR}% ${b.botR}% ${b.botL}% / ${tlOpp}% ${trOpp}% ${brOpp}% ${blOpp}%`;
+            
+            target.style.borderRadius = borderRadius;
+            codeOutput.innerText = `border-radius: ${borderRadius};`;
         }
 
         function copyCode() {
-            const codeText = document.getElementById('code-output').innerText;
-            navigator.clipboard.writeText(codeText).then(() => {
-                const copyBtn = document.querySelector('.copy-btn');
-                copyBtn.innerText = 'Copied!';
+            const text = document.getElementById('code-output').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.innerText = 'Copied!';
+                btn.style.background = '#10b981';
+                btn.style.color = '#0f172a';
+                
                 setTimeout(() => {
-                    copyBtn.innerText = 'Copy';
+                    btn.innerText = 'Copy';
+                    btn.style.background = '#334155';
+                    btn.style.color = 'var(--text-color)';
                 }, 1500);
-            }).catch(err => {
-                console.error('Could not copy text: ', err);
             });
         }
 
